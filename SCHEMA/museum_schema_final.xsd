@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  MUSEUM AND CULTURAL HERITAGE MANAGEMENT PLATFORM - DRAFT XML SCHEMA
+  =====================================================================
+  This is a DISCUSSION DRAFT for the group to review and adjust together.
+  It covers the entities named in the project brief:
+    artifacts, collections, exhibitions, artists, historical periods,
+    cultural sites, curators, loans, restoration projects, and visitors.
+
+  Design approach:
+    - Each entity has its own named complexType (modular, reusable).
+    - IDs follow a readable prefix + number pattern (e.g. OBJ-0001) so
+      humans can tell entity types apart at a glance in the XML data.
+    - Relationships between entities (e.g. an artifact's artist, an
+      exhibition's curator) are modeled as ID-reference attributes,
+      enforced globally using xs:key / xs:keyref on the root element.
+      This is the XML equivalent of foreign keys in a relational database.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+           vc:minVersion="1.1">
+
+  <!-- ================================================================ -->
+  <!-- SIMPLE TYPES: ID patterns and enumerations                       -->
+  <!-- ================================================================ -->
+
+  <xs:simpleType name="HistoricalPeriodIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="HP-[0-9]{3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CulturalSiteIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="CS-[0-9]{3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ArtistIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="ARTIST-[0-9]{3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CuratorIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="CUR-[0-9]{3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CollectionIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="COL-[0-9]{3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ArtifactIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="OBJ-[0-9]{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ExhibitionIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="EXH-[0-9]{3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="LoanIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="LOAN-[0-9]{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RestorationIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="RES-[0-9]{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="VisitorIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="VIS-[0-9]{5}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="VisitIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="VISIT-[0-9]{6}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ArtifactTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Painting"/>
+      <xs:enumeration value="Sculpture"/>
+      <xs:enumeration value="Ceramic"/>
+      <xs:enumeration value="Textile"/>
+      <xs:enumeration value="Manuscript"/>
+      <xs:enumeration value="Photograph"/>
+      <xs:enumeration value="Jewelry"/>
+      <xs:enumeration value="Other"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ConditionEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Excellent"/>
+      <xs:enumeration value="Good"/>
+      <xs:enumeration value="Fair"/>
+      <xs:enumeration value="Poor"/>
+      <xs:enumeration value="Critical"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="LoanStatusEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Pending"/>
+      <xs:enumeration value="Active"/>
+      <xs:enumeration value="Returned"/>
+      <xs:enumeration value="Overdue"/>
+      <xs:enumeration value="Cancelled"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RestorationStatusEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Planned"/>
+      <xs:enumeration value="InProgress"/>
+      <xs:enumeration value="Completed"/>
+      <xs:enumeration value="OnHold"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="TicketTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Standard"/>
+      <xs:enumeration value="Student"/>
+      <xs:enumeration value="Senior"/>
+      <xs:enumeration value="Free"/>
+      <xs:enumeration value="Group"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AgeGroupEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Child"/>
+      <xs:enumeration value="Adult"/>
+      <xs:enumeration value="Senior"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ================================================================ -->
+  <!-- COMPLEX TYPES: one per entity                                    -->
+  <!-- ================================================================ -->
+
+  <!-- A named era used to date artifacts, e.g. "Ming Dynasty", "Baroque" -->
+  <xs:complexType name="HistoricalPeriodType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <!-- Signed integers allow BCE years, e.g. -500 for 500 BCE -->
+      <xs:element name="startYear" type="xs:integer"/>
+      <xs:element name="endYear" type="xs:integer"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="HistoricalPeriodIdType" use="required"/>
+  </xs:complexType>
+
+  <!-- A geographic place of origin, e.g. an archaeological site or region -->
+  <xs:complexType name="CulturalSiteType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="country" type="xs:string"/>
+      <xs:element name="region" type="xs:string" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="CulturalSiteIdType" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="ArtistType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <!-- Optional: many historical artists have unknown birth/death years -->
+      <xs:element name="birthYear" type="xs:integer" minOccurs="0"/>
+      <xs:element name="deathYear" type="xs:integer" minOccurs="0"/>
+      <xs:element name="nationality" type="xs:string" minOccurs="0"/>
+      <xs:element name="biography" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="ArtistIdType" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="CuratorType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="department" type="xs:string"/>
+      <xs:element name="email" type="xs:string"/>
+      <xs:element name="hireDate" type="xs:date"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="CuratorIdType" use="required"/>
+  </xs:complexType>
+
+  <!-- A curated grouping of artifacts, e.g. "East Asian Ceramics" -->
+  <xs:complexType name="CollectionType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="theme" type="xs:string" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="CollectionIdType" use="required"/>
+    <!-- Reference to the curator responsible for this collection -->
+    <xs:attribute name="curatorRef" type="CuratorIdType" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="ArtifactType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="type" type="ArtifactTypeEnum"/>
+      <!-- Optional: creation year may be unknown or approximate -->
+      <xs:element name="creationYear" type="xs:integer" minOccurs="0"/>
+      <xs:element name="condition" type="ConditionEnum"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="acquisitionDate" type="xs:date" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="ArtifactIdType" use="required"/>
+    <!-- All references below are optional: an artifact may have an
+         unknown artist, undated period, unknown origin site, or
+         currently sit outside any collection (e.g. in restoration). -->
+    <xs:attribute name="artistRef" type="ArtistIdType" use="optional"/>
+    <xs:attribute name="periodRef" type="HistoricalPeriodIdType" use="optional"/>
+    <xs:attribute name="siteRef" type="CulturalSiteIdType" use="optional"/>
+    <xs:attribute name="collectionRef" type="CollectionIdType" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="FeaturedArtifactType">
+    <xs:attribute name="artifactRef" type="ArtifactIdType" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="ExhibitionType">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="startDate" type="xs:date"/>
+      <xs:element name="endDate" type="xs:date"/>
+      <xs:element name="location" type="xs:string"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <!-- One exhibition features one or more artifacts -->
+      <xs:element name="FeaturedArtifact" type="FeaturedArtifactType"
+                  minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="ExhibitionIdType" use="required"/>
+    <xs:attribute name="curatorRef" type="CuratorIdType" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="LoanType">
+    <xs:sequence>
+      <xs:element name="borrowingInstitution" type="xs:string"/>
+      <xs:element name="loanStartDate" type="xs:date"/>
+      <xs:element name="loanEndDate" type="xs:date"/>
+      <xs:element name="status" type="LoanStatusEnum"/>
+      <xs:element name="insuranceValue" type="xs:decimal" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="LoanIdType" use="required"/>
+    <xs:attribute name="artifactRef" type="ArtifactIdType" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="RestorationProjectType">
+    <xs:sequence>
+      <xs:element name="startDate" type="xs:date"/>
+      <!-- Optional: end date is unknown while restoration is ongoing -->
+      <xs:element name="endDate" type="xs:date" minOccurs="0"/>
+      <xs:element name="status" type="RestorationStatusEnum"/>
+      <xs:element name="cost" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="RestorationIdType" use="required"/>
+    <xs:attribute name="artifactRef" type="ArtifactIdType" use="required"/>
+    <!-- Optional: restoration may be led by an in-house curator -->
+    <xs:attribute name="curatorRef" type="CuratorIdType" use="optional"/>
+    <!-- Optional: or by an external specialist not in the Curators list -->
+    <xs:attribute name="externalRestorerName" type="xs:string" use="optional"/>
+    <!-- Exactly one of curatorRef / externalRestorerName must be given -->
+    <xs:assert test="(@curatorRef and not(@externalRestorerName)) or (not(@curatorRef) and @externalRestorerName)"/>
+  </xs:complexType>
+
+  <xs:complexType name="VisitorType">
+    <xs:sequence>
+      <xs:element name="ageGroup" type="AgeGroupEnum" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="VisitorIdType" use="required"/>
+  </xs:complexType>
+
+  <!-- A single visit ties one visitor to one exhibition on one date,
+       which is what supports attendance-tracking reports -->
+  <xs:complexType name="VisitType">
+    <xs:sequence>
+      <xs:element name="visitDate" type="xs:date"/>
+      <xs:element name="ticketType" type="TicketTypeEnum"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="VisitIdType" use="required"/>
+    <xs:attribute name="visitorRef" type="VisitorIdType" use="required"/>
+    <xs:attribute name="exhibitionRef" type="ExhibitionIdType" use="required"/>
+  </xs:complexType>
+
+  <!-- ================================================================ -->
+  <!-- ROOT ELEMENT: wraps all entity lists, plus referential integrity -->
+  <!-- ================================================================ -->
+
+  <xs:element name="MuseumDatabase">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="HistoricalPeriods">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="HistoricalPeriod" type="HistoricalPeriodType" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CulturalSites">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CulturalSite" type="CulturalSiteType" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Artists">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Artist" type="ArtistType" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Curators">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Curator" type="CuratorType" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Collections">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Collection" type="CollectionType" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Artifacts">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Artifact" type="ArtifactType" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Exhibitions">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Exhibition" type="ExhibitionType" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Loans">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Loan" type="LoanType" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="RestorationProjects">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RestorationProject" type="RestorationProjectType" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Visitors">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Visitor" type="VisitorType" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Visits">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Visit" type="VisitType" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <!-- An artist can be credited on more than one artifact, but not
+           more than 3: this keeps a single artist from dominating the
+           collection in the current extract. Placed here (on the root
+           complex type) rather than on ArtistType, because an assert
+           only sees the element it is attached to plus its own
+           descendants; ArtistType has no visibility into the
+           separate Artifacts list, but the root element does. -->
+      <xs:assert test="every $a in Artists/Artist/@id satisfies count(Artifacts/Artifact[@artistRef = $a]) le 3"/>
+    </xs:complexType>
+
+    <!-- ============================================================ -->
+    <!-- KEYS: declare each entity's id as a unique primary key        -->
+    <!-- ============================================================ -->
+    <xs:key name="historicalPeriodKey">
+      <xs:selector xpath=".//HistoricalPeriod"/>
+      <xs:field xpath="@id"/>
+    </xs:key>
+    <xs:key name="culturalSiteKey">
+      <xs:selector xpath=".//CulturalSite"/>
+      <xs:field xpath="@id"/>
+    </xs:key>
+    <xs:key name="artistKey">
+      <xs:selector xpath=".//Artist"/>
+      <xs:field xpath="@id"/>
+    </xs:key>
+    <xs:key name="curatorKey">
+      <xs:selector xpath=".//Curator"/>
+      <xs:field xpath="@id"/>
+    </xs:key>
+    <xs:key name="collectionKey">
+      <xs:selector xpath=".//Collection"/>
+      <xs:field xpath="@id"/>
+    </xs:key>
+    <xs:key name="artifactKey">
+      <xs:selector xpath=".//Artifact"/>
+      <xs:field xpath="@id"/>
+    </xs:key>
+    <xs:key name="exhibitionKey">
+      <xs:selector xpath=".//Exhibition"/>
+      <xs:field xpath="@id"/>
+    </xs:key>
+    <xs:key name="visitorKey">
+      <xs:selector xpath=".//Visitor"/>
+      <xs:field xpath="@id"/>
+    </xs:key>
+    <xs:key name="loanKey">
+      <xs:selector xpath=".//Loan"/>
+      <xs:field xpath="@id"/>
+    </xs:key>
+    <xs:key name="restorationKey">
+      <xs:selector xpath=".//RestorationProject"/>
+      <xs:field xpath="@id"/>
+    </xs:key>
+    <xs:key name="visitKey">
+      <xs:selector xpath=".//Visit"/>
+      <xs:field xpath="@id"/>
+    </xs:key>
+
+    <!-- ============================================================ -->
+    <!-- KEYREFS: every *Ref attribute must point to a real key above  -->
+    <!-- This is what enforces referential integrity across entities   -->
+    <!-- ============================================================ -->
+    <xs:keyref name="collectionCuratorRef" refer="curatorKey">
+      <xs:selector xpath=".//Collection"/>
+      <xs:field xpath="@curatorRef"/>
+    </xs:keyref>
+    <xs:keyref name="artifactArtistRef" refer="artistKey">
+      <xs:selector xpath=".//Artifact"/>
+      <xs:field xpath="@artistRef"/>
+    </xs:keyref>
+    <xs:keyref name="artifactPeriodRef" refer="historicalPeriodKey">
+      <xs:selector xpath=".//Artifact"/>
+      <xs:field xpath="@periodRef"/>
+    </xs:keyref>
+    <xs:keyref name="artifactSiteRef" refer="culturalSiteKey">
+      <xs:selector xpath=".//Artifact"/>
+      <xs:field xpath="@siteRef"/>
+    </xs:keyref>
+    <xs:keyref name="artifactCollectionRef" refer="collectionKey">
+      <xs:selector xpath=".//Artifact"/>
+      <xs:field xpath="@collectionRef"/>
+    </xs:keyref>
+    <xs:keyref name="exhibitionCuratorRef" refer="curatorKey">
+      <xs:selector xpath=".//Exhibition"/>
+      <xs:field xpath="@curatorRef"/>
+    </xs:keyref>
+    <xs:keyref name="featuredArtifactRef" refer="artifactKey">
+      <xs:selector xpath=".//FeaturedArtifact"/>
+      <xs:field xpath="@artifactRef"/>
+    </xs:keyref>
+    <xs:keyref name="loanArtifactRef" refer="artifactKey">
+      <xs:selector xpath=".//Loan"/>
+      <xs:field xpath="@artifactRef"/>
+    </xs:keyref>
+    <xs:keyref name="restorationArtifactRef" refer="artifactKey">
+      <xs:selector xpath=".//RestorationProject"/>
+      <xs:field xpath="@artifactRef"/>
+    </xs:keyref>
+    <xs:keyref name="restorationCuratorRef" refer="curatorKey">
+      <xs:selector xpath=".//RestorationProject"/>
+      <xs:field xpath="@curatorRef"/>
+    </xs:keyref>
+    <xs:keyref name="visitVisitorRef" refer="visitorKey">
+      <xs:selector xpath=".//Visit"/>
+      <xs:field xpath="@visitorRef"/>
+    </xs:keyref>
+    <xs:keyref name="visitExhibitionRef" refer="exhibitionKey">
+      <xs:selector xpath=".//Visit"/>
+      <xs:field xpath="@exhibitionRef"/>
+    </xs:keyref>
+
+  </xs:element>
+
+</xs:schema>
