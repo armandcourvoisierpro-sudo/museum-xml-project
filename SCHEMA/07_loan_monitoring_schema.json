@@ -1,0 +1,165 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.org/schemas/loan-monitoring.schema.json",
+    "title": "Museum Loan Monitoring Export",
+    "description": "This file contains information relating to the tracking of works on loan from the museum to external institutions. It specifies the status of the loan, the borrowing institution, the dates of the loan, the insured value, the condition of the work and its original collection.",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "loanMonitoring"
+    ],
+    "properties": {
+        "loanMonitoring": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Container for the loan monitoring export, including a general description and the list of loans.",
+            "required": [
+                "description",
+                "loans"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "Human-readable description of the loan monitoring export."
+                },
+                "loans": {
+                    "type": "array",
+                    "description": "List of loans included in the export.",
+                    "items": {
+                        "$ref": "#/$defs/loan"
+                    }
+                }
+            }
+        }
+    },
+    "$defs": {
+        "loan": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Represents a loan of an artifact from the museum to an external borrowing institution.",
+            "required": [
+                "loanId",
+                "status",
+                "borrowingInstitution",
+                "loanStartDate",
+                "loanEndDate",
+                "insuranceValue",
+                "artifact",
+                "collection"
+            ],
+            "properties": {
+                "loanId": {
+                    "type": "string",
+                    "pattern": "^LOAN-[0-9]{4}$",
+                    "description": "Unique identifier of the loan. Must follow the format LOAN-XXXX, where XXXX is a four-digit number."
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "Active",
+                        "Pending",
+                        "Overdue"
+                    ],
+                    "description": "Current status of the loan."
+                },
+                "borrowingInstitution": {
+                    "type": "string",
+                    "description": "Name of the external institution currently requesting or holding the artifact."
+                },
+                "loanStartDate": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Date on which the loan starts, expressed as an ISO 8601 calendar date (YYYY-MM-DD)."
+                },
+                "loanEndDate": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Date on which the loan ends, expressed as an ISO 8601 calendar date (YYYY-MM-DD)."
+                },
+                "insuranceValue": {
+                    "type": [
+                        "number",
+                        "null"
+                    ],
+                    "minimum": 0,
+                    "description": "Insured value of the artifact. Must be a non-negative number or null when no insurance value is available."
+                },
+                "artifact": {
+                    "$ref": "#/$defs/artifact",
+                    "description": "Information about the artifact associated with the loan."
+                },
+                "collection": {
+                    "$ref": "#/$defs/collection",
+                    "description": "Information about the collection to which the artifact belongs."
+                }
+            }
+        },
+        "artifact": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Describes the museum artifact associated with the loan, including its identifier, name, type and current condition.",
+            "required": [
+                "id",
+                "name",
+                "type",
+                "condition"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "pattern": "^OBJ-[0-9]{4}$",
+                    "description": "Unique identifier of the artifact. Must follow the format OBJ-XXXX, where XXXX is a four-digit number."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the artifact."
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "Painting",
+                        "Sculpture",
+                        "Ceramic",
+                        "Textile",
+                        "Manuscript",
+                        "Photograph",
+                        "Jewelry",
+                        "Other"
+                    ],
+                    "description": "Type of the artifact."
+                },
+                "condition": {
+                    "type": "string",
+                    "enum": [
+                        "Excellent",
+                        "Good",
+                        "Fair",
+                        "Poor",
+                        "Critical"
+                    ],
+                    "description": "Current condition of the artifact."
+                }
+            }
+        },
+        "collection": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Describes the collection to which the artifact belongs, including its identifier and name.",
+            "required": [
+                "id",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "pattern": "^COL-[0-9]{3}$",
+                    "description": "Unique identifier of the collection. Must follow the format COL-XXX, where XXX is a three-digit number."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the collection."
+                }
+            }
+        }
+    }
+}

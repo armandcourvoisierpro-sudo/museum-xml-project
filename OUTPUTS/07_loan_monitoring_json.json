@@ -1,0 +1,136 @@
+
+        {
+            "loanMonitoring": {
+                "description": "Active, pending and overdue museum loans",
+                "loans": [
+                    
+        {
+            "loanId": "LOAN-0006",
+            "status": "Active",
+            "borrowingInstitution": "Sundale Museum of Photography",
+            "loanStartDate": "2024-02-15",
+            "loanEndDate": "2024-05-15",
+            "insuranceValue": 75000.00,
+            "artifact": {
+                "id": "OBJ-0075",
+                "name": "Portrait of a Dockworker",
+                "type": "Photograph",
+                "condition": "Fair"
+            },
+            "collection": {
+                "id": "COL-010",
+                "name": "Modern Photography Collection"
+            }
+        },
+        {
+            "loanId": "LOAN-0003",
+            "status": "Active",
+            "borrowingInstitution": "Northport Museum of Ancient Cultures",
+            "loanStartDate": "2024-01-15",
+            "loanEndDate": "2024-07-15",
+            "insuranceValue": 180000.00,
+            "artifact": {
+                "id": "OBJ-0025",
+                "name": "Marble Head of a Youth",
+                "type": "Sculpture",
+                "condition": "Fair"
+            },
+            "collection": {
+                "id": "COL-003",
+                "name": "Classical Greek & Roman Antiquities"
+            }
+        },
+        {
+            "loanId": "LOAN-0001",
+            "status": "Active",
+            "borrowingInstitution": "Continental Museum of Art, Vienna",
+            "loanStartDate": "2024-02-01",
+            "loanEndDate": "2024-08-01",
+            "insuranceValue": 450000.00,
+            "artifact": {
+                "id": "OBJ-0009",
+                "name": "Morning on the Seine at Argenteuil",
+                "type": "Painting",
+                "condition": "Excellent"
+            },
+            "collection": {
+                "id": "COL-001",
+                "name": "European Old Masters"
+            }
+        },
+        {
+            "loanId": "LOAN-0007",
+            "status": "Overdue",
+            "borrowingInstitution": "Old Harbor Antiquities Museum",
+            "loanStartDate": "2023-07-01",
+            "loanEndDate": "2023-12-01",
+            "insuranceValue": 540000.00,
+            "artifact": {
+                "id": "OBJ-0016",
+                "name": "Canopic Jar of Nebamun",
+                "type": "Ceramic",
+                "condition": "Fair"
+            },
+            "collection": {
+                "id": "COL-002",
+                "name": "Ancient Egyptian Antiquities"
+            }
+        },
+        {
+            "loanId": "LOAN-0005",
+            "status": "Pending",
+            "borrowingInstitution": "Grandport National Gallery",
+            "loanStartDate": "2024-03-01",
+            "loanEndDate": "2024-09-01",
+            "insuranceValue": 310000.00,
+            "artifact": {
+                "id": "OBJ-0037",
+                "name": "White Porcelain Bowl, Xing Kiln",
+                "type": "Ceramic",
+                "condition": "Excellent"
+            },
+            "collection": {
+                "id": "COL-004",
+                "name": "Chinese Art & Ceramics"
+            }
+        },
+        {
+            "loanId": "LOAN-0008",
+            "status": "Pending",
+            "borrowingInstitution": "Ashfield Museum of World Art",
+            "loanStartDate": "2024-04-01",
+            "loanEndDate": "2024-10-01",
+            "insuranceValue": null,
+            "artifact": {
+                "id": "OBJ-0044",
+                "name": "Screen Painting, Autumn Grasses",
+                "type": "Painting",
+                "condition": "Good"
+            },
+            "collection": {
+                "id": "COL-005",
+                "name": "Japanese Art & Artifacts"
+            }
+        },
+        {
+            "loanId": "LOAN-0011",
+            "status": "Pending",
+            "borrowingInstitution": "Falkenridge Municipal Museum",
+            "loanStartDate": "2024-05-01",
+            "loanEndDate": "2024-11-01",
+            "insuranceValue": 410000.00,
+            "artifact": {
+                "id": "OBJ-0030",
+                "name": "Marble Portrait Bust of a Roman Matron",
+                "type": "Sculpture",
+                "condition": "Good"
+            },
+            "collection": {
+                "id": "COL-003",
+                "name": "Classical Greek & Roman Antiquities"
+            }
+        }
+                ]
+            }
+        }
+    
