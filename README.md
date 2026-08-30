@@ -47,16 +47,16 @@ Ten transformation scenarios are included:
 9. Curator assignments — YAML
 10. Loan monitoring — JSON
 
-### Streamlit loader
+### Streamlit
 
 The Streamlit part provides an interactive interface for the pipeline. The main workflow is:
 
-1. Load the XML dataset.
+1. Load the XML name 08_exhibition_press_feed_xml.xml in the Output file.
 2. Validate the XML against the XSD.
 3. Run an XSLT transformation.
-4. Display or save the resulting output.
+4. Display the XML as HTML
 
-The Streamlit loader/interface work was carried out by **Person C** as part of the loader/validator work.
+You can access also by this link : https://museum-xml-test.streamlit.app/
 
 ### Schema access and maintenance
 
@@ -118,41 +118,29 @@ streamlit run streamlit_app.py
 
 Use the actual Streamlit filename if the repository uses a different entry point.
 
+or use this link : https://museum-xml-test.streamlit.app/
+
 ### Reproducibility
 
 The dataset generation script uses a fixed random seed so that the development dataset can be reproduced consistently. The XML dataset is synthetic/fictional and is intended for development and testing.
 
 ### Group work
 
-**Person A — Surya Pavan Karri**
+**Surya Pavan Karri**
 - XML/database and dataset work
 - HTML visualisation work
 - XSD/schema work
 - Working environment/tools section
 - Schema maintenance after access/responsibility was transferred
 
-**Person B — Aya Saadi**
+**Aya Saadi**
 - HTML visualisation work
 - XML-to-XML transformations
 - XML-to-YAML transformation
 
-**Person C — Courvoisier Armand**
+**Courvoisier Armand**
 - XML-to-JSON transformation
 - JSON Schema
-- Python/Java loader/validator
+- Python loader/validator
 - Streamlit loader/interface
 
-The final report should be used as the authoritative record for the exact contribution percentages agreed by the group.
-
-### Final consistency check
-
-Before submission, check:
-
-- XSD ↔ XML dataset
-- Schema relationships and business rules
-- XSLT ↔ XML element and attribute names
-- JSON output ↔ JSON Schema
-- Streamlit loader ↔ current schema and dataset
-- Negative validation tests
-- Report ↔ actual work completed
-- GitHub repository ↔ final submission files
