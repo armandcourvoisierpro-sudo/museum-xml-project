@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LoanManifest generatedFor="courier-and-insurer" recordCount="6">
+  <Shipment id="LOAN-0003" status="Active">
+    <ObjectReference>OBJ-0025</ObjectReference>
+    <ObjectTitle>Marble Head of a Youth</ObjectTitle>
+    <ObjectType>Sculpture</ObjectType>
+    <ObjectCondition>Fair</ObjectCondition>
+    <Destination>Northport Museum of Ancient Cultures</Destination>
+    <DepartureDate>2024-01-15</DepartureDate>
+    <ReturnDueDate>2024-07-15</ReturnDueDate>
+    <InsuredValue currency="EUR">180000.00</InsuredValue>
+  </Shipment>
+  <Shipment id="LOAN-0001" status="Active">
+    <ObjectReference>OBJ-0009</ObjectReference>
+    <ObjectTitle>Morning on the Seine at Argenteuil</ObjectTitle>
+    <ObjectType>Painting</ObjectType>
+    <ObjectCondition>Excellent</ObjectCondition>
+    <Destination>Continental Museum of Art, Vienna</Destination>
+    <DepartureDate>2024-02-01</DepartureDate>
+    <ReturnDueDate>2024-08-01</ReturnDueDate>
+    <InsuredValue currency="EUR">450000.00</InsuredValue>
+  </Shipment>
+  <Shipment id="LOAN-0006" status="Active">
+    <ObjectReference>OBJ-0075</ObjectReference>
+    <ObjectTitle>Portrait of a Dockworker</ObjectTitle>
+    <ObjectType>Photograph</ObjectType>
+    <ObjectCondition>Fair</ObjectCondition>
+    <Destination>Sundale Museum of Photography</Destination>
+    <DepartureDate>2024-02-15</DepartureDate>
+    <ReturnDueDate>2024-05-15</ReturnDueDate>
+    <InsuredValue currency="EUR">75000.00</InsuredValue>
+  </Shipment>
+  <Shipment id="LOAN-0005" status="Pending">
+    <ObjectReference>OBJ-0037</ObjectReference>
+    <ObjectTitle>White Porcelain Bowl, Xing Kiln</ObjectTitle>
+    <ObjectType>Ceramic</ObjectType>
+    <ObjectCondition>Excellent</ObjectCondition>
+    <Destination>Grandport National Gallery</Destination>
+    <DepartureDate>2024-03-01</DepartureDate>
+    <ReturnDueDate>2024-09-01</ReturnDueDate>
+    <InsuredValue currency="EUR">310000.00</InsuredValue>
+  </Shipment>
+  <Shipment id="LOAN-0008" status="Pending">
+    <ObjectReference>OBJ-0044</ObjectReference>
+    <ObjectTitle>Screen Painting, Autumn Grasses</ObjectTitle>
+    <ObjectType>Painting</ObjectType>
+    <ObjectCondition>Good</ObjectCondition>
+    <Destination>Ashfield Museum of World Art</Destination>
+    <DepartureDate>2024-04-01</DepartureDate>
+    <ReturnDueDate>2024-10-01</ReturnDueDate>
+  </Shipment>
+  <Shipment id="LOAN-0011" status="Pending">
+    <ObjectReference>OBJ-0030</ObjectReference>
+    <ObjectTitle>Marble Portrait Bust of a Roman Matron</ObjectTitle>
+    <ObjectType>Sculpture</ObjectType>
+    <ObjectCondition>Good</ObjectCondition>
+    <Destination>Falkenridge Municipal Museum</Destination>
+    <DepartureDate>2024-05-01</DepartureDate>
+    <ReturnDueDate>2024-11-01</ReturnDueDate>
+    <InsuredValue currency="EUR">410000.00</InsuredValue>
+  </Shipment>
+</LoanManifest>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PressFeed generatedFor="press-office-and-website">
+  <Show ref="EXH-003">
+    <Headline>Gifts for the Afterlife: Egyptian Funerary Art</Headline>
+    <Venue>East Wing, Gallery 2</Venue>
+    <RunDates>2023-02-01 - 2023-06-30</RunDates>
+    <Curator>Rania Haddad</Curator>
+    <Teaser>Objects associated with New Kingdom burial practice.</Teaser>
+  </Show>
+  <Show ref="EXH-001">
+    <Headline>Masters of the Renaissance</Headline>
+    <Venue>West Wing, Gallery 1</Venue>
+    <RunDates>2023-03-01 - 2023-08-31</RunDates>
+    <Curator>Margaret Sinclair</Curator>
+    <Teaser>Survey of Italian and Northern Renaissance painting and sculpture.</Teaser>
+  </Show>
+  <Show ref="EXH-005">
+    <Headline>Silk and Celadon: Tang Dynasty Splendor</Headline>
+    <Venue>North Wing, Gallery 1</Venue>
+    <RunDates>2023-04-10 - 2023-09-10</RunDates>
+    <Curator>Wei Chen</Curator>
+    <Teaser>Ceramics, paintings and metalwork from the Tang imperial court.</Teaser>
+  </Show>
+  <Show ref="EXH-002">
+    <Headline>Light on the Seine: French Impressionism</Headline>
+    <Venue>West Wing, Gallery 3</Venue>
+    <RunDates>2023-05-15 - 2023-10-01</RunDates>
+    <Curator>Margaret Sinclair</Curator>
+    <Teaser>Featuring 3 objects from the collection.</Teaser>
+  </Show>
+  <Show ref="EXH-006">
+    <Headline>Kingdoms of Bronze: Court Art of Benin</Headline>
+    <Venue>South Wing, Gallery 2</Venue>
+    <RunDates>2023-06-01 - 2023-11-30</RunDates>
+    <Curator>Adaeze Nwosu</Curator>
+    <Teaser>Cast bronze and carved ivory from the Kingdom of Benin.</Teaser>
+  </Show>
+  <Show ref="EXH-004">
+    <Headline>The Classical World</Headline>
+    <Venue>East Wing, Gallery 1</Venue>
+    <RunDates>2023-09-01 - 2024-02-28</RunDates>
+    <Curator>Rania Haddad</Curator>
+    <Teaser>Featuring 6 objects from the collection.</Teaser>
+  </Show>
+  <Show ref="EXH-008">
+    <Headline>Cities Under Ash: Roman Pompeii</Headline>
+    <Venue>East Wing, Gallery 3</Venue>
+    <RunDates>2023-10-01 - 2024-03-31</RunDates>
+    <Curator>Rania Haddad</Curator>
+    <Teaser>Everyday and ceremonial objects recovered from the Pompeii excavation.</Teaser>
+  </Show>
+  <Show ref="EXH-007">
+    <Headline>Early Frames: Photography 1890-1930</Headline>
+    <Venue>South Wing, Gallery 4</Venue>
+    <RunDates>2024-01-15 - 2024-06-15</RunDates>
+    <Curator>Nathaniel Brooks</Curator>
+    <Teaser>Featuring 6 objects from the collection.</Teaser>
+  </Show>
+</PressFeed>
