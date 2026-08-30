@@ -1,0 +1,65 @@
+curators:
+  - id: CUR-006
+    name: "Adaeze Nwosu"
+    department: "Decorative Arts"
+    collections:
+      - "COL-007 - African Art & Artifacts"
+      - "COL-011 - Decorative Arts & Jewelry"
+      - "COL-009 - Manuscripts & Rare Books"
+    exhibitions:
+      - "EXH-006 - Kingdoms of Bronze: Court Art of Benin"
+    restorationProjectsLed:
+      - RES-0010
+      - RES-0011
+  - id: CUR-004
+    name: "Isabel Duarte"
+    department: "Textiles & Costume"
+    collections:
+      - "COL-008 - Textiles & Costume Heritage"
+    exhibitions: []
+    restorationProjectsLed:
+      - RES-0005
+      - RES-0007
+  - id: CUR-001
+    name: "Margaret Sinclair"
+    department: "Paintings & Sculpture"
+    collections:
+      - "COL-001 - European Old Masters"
+    exhibitions:
+      - "EXH-002 - Light on the Seine: French Impressionism"
+      - "EXH-001 - Masters of the Renaissance"
+    restorationProjectsLed:
+      - RES-0013
+  - id: CUR-005
+    name: "Nathaniel Brooks"
+    department: "Photography & Modern Art"
+    collections:
+      - "COL-010 - Modern Photography Collection"
+    exhibitions:
+      - "EXH-007 - Early Frames: Photography 1890-1930"
+    restorationProjectsLed:
+      - RES-0014
+  - id: CUR-002
+    name: "Rania Haddad"
+    department: "Antiquities & Archaeology"
+    collections:
+      - "COL-002 - Ancient Egyptian Antiquities"
+      - "COL-003 - Classical Greek & Roman Antiquities"
+      - "COL-006 - Pre-Columbian Art"
+    exhibitions:
+      - "EXH-008 - Cities Under Ash: Roman Pompeii"
+      - "EXH-003 - Gifts for the Afterlife: Egyptian Funerary Art"
+      - "EXH-004 - The Classical World"
+    restorationProjectsLed:
+      - RES-0001
+      - RES-0003
+      - RES-0008
+  - id: CUR-003
+    name: "Wei Chen"
+    department: "Asian Art"
+    collections:
+      - "COL-004 - Chinese Art & Ceramics"
+      - "COL-005 - Japanese Art & Artifacts"
+    exhibitions:
+      - "EXH-005 - Silk and Celadon: Tang Dynasty Splendor"
+    restorationProjectsLed: []

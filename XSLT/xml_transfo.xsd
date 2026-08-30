@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!--
+  Scenario :This code validates an XML file (08_exhibition_press_feed_xml.xml)
+  against a schema and transforms it into a readable HTML page for display. 
+  It helps ensure that museum data is well-structured, correct, 
+  and easy to present to users.
+-->
+
+  <xs:element name="PressFeed">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Show" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Headline" type="xs:string"/>
+              <xs:element name="Venue" type="xs:string"/>
+              <xs:element name="RunDates" type="xs:string"/>
+              <xs:element name="Curator" type="xs:string"/>
+              <xs:element name="Teaser" type="xs:string"/>
+            </xs:sequence>
+            <xs:attribute name="ref" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="generatedFor" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

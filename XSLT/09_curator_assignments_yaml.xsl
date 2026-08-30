@@ -21,7 +21,7 @@
   <xsl:key name="exhibitionsByCurator" match="Exhibition" use="@curatorRef"/>
   <xsl:key name="restorationsByCurator" match="RestorationProject" use="@curatorRef"/>
 
-  <xsl:template match="/MuseumDatabase">
+  <xsl:template match="/DATA">
     <xsl:text>curators:&#10;</xsl:text>
     <xsl:apply-templates select="Curators/Curator">
       <xsl:sort select="name"/>

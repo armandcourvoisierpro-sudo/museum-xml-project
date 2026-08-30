@@ -16,7 +16,7 @@
 
   <xsl:key name="artifactById" match="Artifact" use="@id"/>
 
-  <xsl:template match="/MuseumDatabase">
+  <xsl:template match="/DATA">
     <LoanManifest generatedFor="courier-and-insurer" recordCount="{count(Loans/Loan[status='Pending' or status='Active'])}">
       <xsl:apply-templates select="Loans/Loan[status='Pending' or status='Active']">
         <xsl:sort select="loanStartDate"/>

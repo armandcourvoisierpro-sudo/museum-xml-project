@@ -14,7 +14,7 @@
 
   <xsl:key name="curatorById" match="Curator" use="@id"/>
 
-  <xsl:template match="/MuseumDatabase">
+  <xsl:template match="/DATA">
     <PressFeed generatedFor="press-office-and-website">
       <xsl:apply-templates select="Exhibitions/Exhibition">
         <xsl:sort select="startDate"/>
